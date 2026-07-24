@@ -18,6 +18,9 @@ coverage
 .claude/settings.local.json
 CLAUDE.local.md
 
+# 個人の作業用TODO（公開リポジトリには出さない）
+TODO.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
