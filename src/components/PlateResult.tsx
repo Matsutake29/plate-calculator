@@ -12,6 +12,7 @@ const plateHeight = (weight: PlateWeight): string => {
   if (weight >= 5) return '44px'
   if (weight >= 2.5) return '36px'
   if (weight >= 1.25) return '28px'
+  if (weight >= 1) return '26px'
   return '22px'
 }
 
@@ -41,12 +42,12 @@ const PlateResult = ({ result }: PlateResultProps) => {
 
       {shortfall > 0 && (
         <p className="mt-1 text-xs text-text-sub">
-          あと{shortfall}kg分、組める在庫がありません
+          使用可能なプレートでは、あと{shortfall}kg分を組めません
         </p>
       )}
 
       <div
-        className="mt-4 flex h-16 items-end gap-[3px] border-b-2 border-text-sub px-1"
+        className="mt-4 flex h-16 items-end gap-[3px] overflow-x-auto border-b-2 border-text-sub px-1"
         aria-hidden="true"
       >
         {breakdown.flatMap((item) =>

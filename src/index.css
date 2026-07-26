@@ -65,3 +65,14 @@ body {
 #root {
   min-height: 100svh;
 }
+
+/* 増減は±ボタンに集約しているので、type="number"のネイティブスピナーは出さない。
+   狭い画面で数値表示を圧迫するのを避ける目的もある */
+input[type='number'] {
+  appearance: textfield;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
