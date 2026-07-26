@@ -96,6 +96,46 @@ describe('calculatePlates', () => {
     }
   })
 
+  it('1kgプレート: 2.5kgの次に1kgを使って片側3.5kgを組める', () => {
+    const result = calculatePlates({
+      targetWeight: 27,
+      barWeight: 20,
+      collarWeight: 0,
+      availablePlates: PLATE_WEIGHTS,
+    })
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      expect(result.achievedPerSideWeight).toBe(3.5)
+      expect(result.breakdown).toEqual([
+        { weight: 2.5, count: 1 },
+        { weight: 1, count: 1 },
+      ])
+      expect(result.shortfall).toBe(0)
+    }
+  })
+
+  it('記録挑戦: 0.25kgプレート片側1枚で合計0.5kgの上乗せを実現できる', () => {
+    // IPFの新記録は既存記録より最低0.5kg上（Technical Rulebook 9.1(g)）。
+    // 両側対称なので片側0.25kg = 合計0.5kgが物理的な最小の増分になる
+    const result = calculatePlates({
+      targetWeight: 200.5,
+      barWeight: 20,
+      collarWeight: 5,
+      availablePlates: PLATE_WEIGHTS,
+    })
+    expect(result.ok).toBe(true)
+    if (result.ok) {
+      expect(result.achievedPerSideWeight).toBe(87.75)
+      expect(result.breakdown).toEqual([
+        { weight: 25, count: 3 },
+        { weight: 10, count: 1 },
+        { weight: 2.5, count: 1 },
+        { weight: 0.25, count: 1 },
+      ])
+      expect(result.shortfall).toBe(0)
+    }
+  })
+
   it('小プレートoff: 0.25kg単位の端数を埋める手段がなくshortfallに残る', () => {
     // 143kgは0.25kg単位の値だが、片側の端数0.25kg分を埋めるには1.25kgより
     // 細かいプレートが要る。0.5kg・0.25kgをoffにするとそこで打ち止めになる
