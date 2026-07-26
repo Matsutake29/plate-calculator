@@ -1,121 +1,74 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import EnvironmentSettings from './components/EnvironmentSettings'
+import PlateResult from './components/PlateResult'
+import WeightInput from './components/WeightInput'
+import type {
+  BarWeight,
+  CollarWeight,
+  PlateWeight,
+} from './lib/calculatePlates'
+import { calculatePlates, PLATE_WEIGHTS } from './lib/calculatePlates'
+
+const INITIAL_BAR_WEIGHT: BarWeight = 20
+const INITIAL_COLLAR_WEIGHT: CollarWeight = 0
+
+// 要件定義の既定値: 25〜1.25kgはon、0.5/0.25kg（記録挑戦用の小プレート）はoff
+const INITIAL_PLATE_AVAILABILITY: Record<PlateWeight, boolean> = {
+  25: true,
+  20: true,
+  15: true,
+  10: true,
+  5: true,
+  2.5: true,
+  1.25: true,
+  0.5: false,
+  0.25: false,
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [targetWeight, setTargetWeight] = useState(
+    INITIAL_BAR_WEIGHT + INITIAL_COLLAR_WEIGHT,
+  )
+  const [barWeight, setBarWeight] = useState<BarWeight>(INITIAL_BAR_WEIGHT)
+  const [collarWeight, setCollarWeight] = useState<CollarWeight>(
+    INITIAL_COLLAR_WEIGHT,
+  )
+  const [plateAvailability, setPlateAvailability] = useState(
+    INITIAL_PLATE_AVAILABILITY,
+  )
+
+  const availablePlates = PLATE_WEIGHTS.filter(
+    (weight) => plateAvailability[weight],
+  )
+
+  const result = calculatePlates({
+    targetWeight,
+    barWeight,
+    collarWeight,
+    availablePlates,
+  })
+
+  const handleTogglePlate = (weight: PlateWeight) => {
+    setPlateAvailability((prev) => ({ ...prev, [weight]: !prev[weight] }))
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1 className="text-3xl font-bold">Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className="mx-auto flex min-h-svh w-full max-w-md flex-col gap-4 p-4">
+      <h1 className="text-lg font-bold text-text">プレート計算機</h1>
 
-      <div className="ticks"></div>
+      <WeightInput value={targetWeight} onChange={setTargetWeight} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      <EnvironmentSettings
+        barWeight={barWeight}
+        onBarWeightChange={setBarWeight}
+        collarWeight={collarWeight}
+        onCollarWeightChange={setCollarWeight}
+        plateAvailability={plateAvailability}
+        onTogglePlate={handleTogglePlate}
+      />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <PlateResult result={result} />
+    </main>
   )
 }
 
