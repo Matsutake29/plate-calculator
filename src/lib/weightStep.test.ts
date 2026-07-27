@@ -60,3 +60,35 @@ describe('roundTargetWeight', () => {
     expect(roundTargetWeight(58.75, 20, 0.5)).toBe(59)
   })
 })
+
+describe('±ボタンの増減幅', () => {
+  const BAR_WEIGHT = 20
+
+  it('刻みより小さい増減幅は丸めに潰される（固定値を使ってはいけない理由）', () => {
+    // 刻み10kgの環境で2.5kg動かそうとしても、最寄りの刻みは元の位置なので戻される。
+    // 中間に落ちた場合もMath.roundが常に上へ倒すため、−方向だけが食われて非対称になる
+    expect(roundTargetWeight(100 + 2.5, BAR_WEIGHT, 10)).toBe(100)
+    expect(roundTargetWeight(100 - 2.5, BAR_WEIGHT, 10)).toBe(100)
+    expect(roundTargetWeight(50 + 2.5, BAR_WEIGHT, 5)).toBe(55) // ＋は進むのに
+    expect(roundTargetWeight(50 - 2.5, BAR_WEIGHT, 5)).toBe(50) // −は戻される
+  })
+
+  // ±ボタンは「その環境の刻み1つ分」を要求する。刻みの整数倍なので丸めが介入せず、
+  // どの在庫でも押した分だけ確実に動き、＋と−の移動量が等しくなる
+  for (const smallestPlate of PLATE_WEIGHTS) {
+    const step = getWeightStep(
+      PLATE_WEIGHTS.filter((weight) => weight >= smallestPlate),
+    )
+
+    it(`最小${smallestPlate}kg（${step}kg刻み）の環境で±が対称に動く`, () => {
+      const current = roundTargetWeight(100, BAR_WEIGHT, step)
+
+      expect(roundTargetWeight(current + step, BAR_WEIGHT, step)).toBe(
+        current + step,
+      )
+      expect(roundTargetWeight(current - step, BAR_WEIGHT, step)).toBe(
+        current - step,
+      )
+    })
+  }
+})
