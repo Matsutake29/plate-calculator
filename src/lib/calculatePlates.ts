@@ -1,11 +1,13 @@
 // バー・カラーは選択式なので、あり得る値だけをリテラル型で列挙している
 export type BarWeight = 20 | 15 | 10
 export type CollarWeight = 0 | 5 // 2.5kg×2 または なし
-export type PlateWeight = 25 | 20 | 15 | 10 | 5 | 2.5 | 1.25 | 0.5 | 0.25
+export type PlateWeight = 25 | 20 | 15 | 10 | 5 | 2.5 | 1.25 | 1 | 0.5 | 0.25
 
-// IPF/JPA規定のプレートラインナップ（重い順）
+// IPF公認ディスクの全ラインナップ（重い順）。
+// 通常競技で使うのは1.25kg以上（IPF 2.3(b)3）。1kg以下は記録挑戦用の
+// 「lighter discs」で、規格重量としては1kg・0.5kg・0.25kgが存在する（同 2.3(b)1の許容誤差表）
 export const PLATE_WEIGHTS: PlateWeight[] = [
-  25, 20, 15, 10, 5, 2.5, 1.25, 0.5, 0.25,
+  25, 20, 15, 10, 5, 2.5, 1.25, 1, 0.5, 0.25,
 ]
 
 // calculatePlatesへの入力
@@ -43,10 +45,11 @@ export type CalculatePlatesResult =
       reason: 'invalidInput'
     }
 
-// 0.25kg単位を1とする整数に変換し、浮動小数点誤差を避ける（例: 0.1+0.2の丸め誤差問題）
-const UNIT_KG = 0.25
-const toUnits = (kg: number): number => Math.round(kg / UNIT_KG)
-const toKg = (units: number): number => units * UNIT_KG
+// 0.25kg単位を1とする整数に変換し、浮動小数点誤差を避ける（例: 0.1+0.2の丸め誤差問題）。
+// 最小のディスクが0.25kgなので、これがこのアプリで扱う重量の最小分解能になる
+export const UNIT_KG = 0.25
+export const toUnits = (kg: number): number => Math.round(kg / UNIT_KG)
+export const toKg = (units: number): number => units * UNIT_KG
 
 export const calculatePlates = (
   input: CalculatePlatesInput,
