@@ -31,13 +31,16 @@
 - **ライト / ダーク自動対応** — 端末の設定に追従します
 - **キーボード操作・スクリーンリーダー対応**
 
-<p>
-  <img src="docs/images/result-142.5kg.jpg" alt="142.5kg を計算した画面" width="40%">
-  <img src="docs/images/environment-settings.jpg" alt="環境設定を展開した画面" width="40%">
-</p>
-
-左: `142.3` と入力すると **142.5kg に丸まり**、片側 61.25kg（25kg × 2 + 10kg + 1.25kg）が表示されます。
-右: 環境設定で 0.25kg プレートを on にすると、入力の刻みが自動で **「0.5kg 単位」** に変わります。
+<table>
+  <tr>
+    <td width="50%" valign="top"><img src="docs/images/result-142.5kg.jpg" alt="142.5kg を計算した画面"></td>
+    <td width="50%" valign="top"><img src="docs/images/environment-settings.jpg" alt="環境設定を展開した画面"></td>
+  </tr>
+  <tr>
+    <td valign="top"><code>142.3</code> と入力すると <strong>142.5kg に丸まり</strong>、片側 61.25kg（25kg × 2 + 10kg + 1.25kg）が表示されます。</td>
+    <td valign="top">環境設定で 0.25kg プレートを on にすると、入力の刻みが自動で <strong>「0.5kg 単位」</strong> に変わります。</td>
+  </tr>
+</table>
 
 ## 技術スタック
 
