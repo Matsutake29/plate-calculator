@@ -16,12 +16,13 @@ type EnvironmentSettingsProps = {
   onTogglePlate: (weight: PlateWeight) => void
 }
 
-// 選択中/未選択でボタンの見た目を出し分ける（3種の選択UIで共通）
+// 選択中/未選択でボタンの見た目を出し分ける（3種の選択UIで共通）。
+// ホバーは面の色を一段変えるだけにとどめ、選択中を示すaccent色とは競合させない
 const toggleButtonClass = (active: boolean) =>
-  `rounded-full border px-3 py-1.5 text-sm transition ${
+  `focus-ring rounded-full border px-3 py-1.5 text-sm transition ${
     active
-      ? 'border-accent bg-accent-soft font-semibold text-accent'
-      : 'border-border bg-surface-2 text-text-sub'
+      ? 'border-accent bg-accent-soft font-semibold text-accent hover:bg-accent-soft-hover'
+      : 'border-border bg-surface-2 text-text-sub hover:border-text-sub hover:bg-surface-hover hover:text-text'
   }`
 
 const EnvironmentSettings = ({
@@ -34,7 +35,7 @@ const EnvironmentSettings = ({
 }: EnvironmentSettingsProps) => {
   return (
     <details className="group rounded-2xl border border-border bg-surface p-4">
-      <summary className="flex cursor-pointer list-none items-center gap-1 text-sm font-medium text-text-sub marker:content-none">
+      <summary className="focus-ring flex w-fit cursor-pointer list-none items-center gap-1 rounded-md text-sm font-medium text-text-sub transition hover:text-text marker:content-none">
         環境設定
         <span className="transition-transform group-open:rotate-180">▾</span>
       </summary>
