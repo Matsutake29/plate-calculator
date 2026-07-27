@@ -15,6 +15,10 @@
   --border: #e3e3e0;
   --accent: #0f766e;
   --accent-soft: #dbeeec;
+  /* ホバー時の面の色。ライトは一段暗く、ダークは一段明るくすることで、
+     どちらのテーマでも「カーソルを載せると手前に浮く」向きに揃える */
+  --surface-hover: #e0e0dc;
+  --accent-soft-hover: #c7e5e1;
   /* プレートと背景を分離する輪郭。背景と反対側の色にすることで、
      白(5kg)・黒(2.5kg)どちらも同じ1本の輪郭で成立させる */
   --plate-edge: rgba(0, 0, 0, 0.3);
@@ -30,6 +34,8 @@
     --border: #35373a;
     --accent: #2dd4bf;
     --accent-soft: rgba(45, 212, 191, 0.16);
+    --surface-hover: #35373b;
+    --accent-soft-hover: rgba(45, 212, 191, 0.28);
     --plate-edge: rgba(255, 255, 255, 0.32);
   }
 }
@@ -43,7 +49,22 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-surface-hover: var(--surface-hover);
+  --color-accent-soft-hover: var(--accent-soft-hover);
   --color-plate-edge: var(--plate-edge);
+}
+
+/*
+ * キーボード操作時だけ出るフォーカスリング。
+ * :focus-visible はブラウザが「キーボードで到達した」と判断したときだけ効くので、
+ * マウスのクリックではリングが出ない。複数のコンポーネントで見た目を揃えるため、
+ * Tailwind v4 の @utility でユーティリティクラスとして定義する（class="focus-ring" で使える）
+ */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }
 
 body {

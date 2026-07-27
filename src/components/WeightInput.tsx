@@ -42,7 +42,7 @@ const WeightInput = ({ value, onChange, step, min, max }: WeightInputProps) => {
           onClick={() => onChange(value - STEP_BUTTON_DELTA)}
           disabled={value <= min}
           aria-label={`${STEP_BUTTON_DELTA}kg減らす`}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface-2 text-lg text-text transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
+          className="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface-2 text-lg text-text transition enabled:hover:border-text-sub enabled:hover:bg-surface-hover active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
         >
           −
         </button>
@@ -61,7 +61,7 @@ const WeightInput = ({ value, onChange, step, min, max }: WeightInputProps) => {
             onKeyDown={(e) => {
               if (e.key === 'Enter') e.currentTarget.blur()
             }}
-            className="w-28 border-none bg-transparent text-right text-3xl font-bold text-text tabular-nums outline-none"
+            className="focus-ring w-28 rounded-md border-none bg-transparent text-right text-3xl font-bold text-text tabular-nums"
           />
           <span className="text-base text-text-sub">kg</span>
         </div>
@@ -71,7 +71,7 @@ const WeightInput = ({ value, onChange, step, min, max }: WeightInputProps) => {
           onClick={() => onChange(value + STEP_BUTTON_DELTA)}
           disabled={value >= max}
           aria-label={`${STEP_BUTTON_DELTA}kg増やす`}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface-2 text-lg text-text transition active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
+          className="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface-2 text-lg text-text transition enabled:hover:border-text-sub enabled:hover:bg-surface-hover active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
         >
           ＋
         </button>
