@@ -4,7 +4,40 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>プレート計算機</title>
+    <meta
+      name="description"
+      content="バーベルの目標重量から、片側に付けるプレートの組み合わせを計算します。バー・カラー・手持ちのプレートを設定すると、実際に組める重量だけを提案します。"
+    />
+
+    <!-- スマートフォンのアドレスバーをアプリの背景色に合わせる。
+         index.css のライト/ダークのトークンと同じ値を使っている -->
+    <meta
+      name="theme-color"
+      content="#f7f7f5"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#17181a"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <!-- URLを共有したときのカード表示。og:image は掲載用の画像が決まってから追加する -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="プレート計算機" />
+    <meta
+      property="og:description"
+      content="バーベルの目標重量から、片側に付けるプレートの組み合わせを計算します。手持ちのプレートに合わせて、実際に組める重量だけを提案します。"
+    />
+    <meta
+      property="og:url"
+      content="https://plate-calculator-zeta.vercel.app/"
+    />
+    <meta property="og:site_name" content="プレート計算機" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta name="twitter:card" content="summary" />
   </head>
   <body>
     <div id="root"></div>
