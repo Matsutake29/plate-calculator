@@ -1,13 +1,12 @@
 import { useState } from 'react'
 
-// ステッパーの増減幅。ウォームアップで多用する刻みに合わせている。
-// 実際に適用される値は親側でその環境の刻みに丸められる
-const STEP_BUTTON_DELTA = 2.5
-
 type WeightInputProps = {
   value: number
   onChange: (value: number) => void
-  step: number // その環境で実現できる刻み幅（使えるいちばん軽いプレートの2倍）
+  // その環境で実現できる刻み幅（使えるいちばん軽いプレートの2倍）。
+  // ±ボタンはこの1つ分だけ動かす。固定値にすると親側の丸めと食い違い、
+  // 刻みが粗い環境ではボタンを押しても元の位置に戻されてしまう
+  step: number
   min: number // バー+カラーの合計。これ未満は組めない
   max: number
 }
@@ -39,9 +38,9 @@ const WeightInput = ({ value, onChange, step, min, max }: WeightInputProps) => {
       <div className="mt-2 flex items-center justify-between gap-3">
         <button
           type="button"
-          onClick={() => onChange(value - STEP_BUTTON_DELTA)}
+          onClick={() => onChange(value - step)}
           disabled={value <= min}
-          aria-label={`${STEP_BUTTON_DELTA}kg減らす`}
+          aria-label={`${step}kg減らす`}
           className="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface-2 text-lg text-text transition enabled:hover:border-text-sub enabled:hover:bg-surface-hover active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
         >
           −
@@ -68,9 +67,9 @@ const WeightInput = ({ value, onChange, step, min, max }: WeightInputProps) => {
 
         <button
           type="button"
-          onClick={() => onChange(value + STEP_BUTTON_DELTA)}
+          onClick={() => onChange(value + step)}
           disabled={value >= max}
-          aria-label={`${STEP_BUTTON_DELTA}kg増やす`}
+          aria-label={`${step}kg増やす`}
           className="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-surface-2 text-lg text-text transition enabled:hover:border-text-sub enabled:hover:bg-surface-hover active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
         >
           ＋
