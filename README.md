@@ -5,6 +5,8 @@
 
 **▶ https://plate-calculator-zeta.vercel.app/**
 
+制作の背景と設計の解説 → **https://mt-tk.com/plate-calculator/**
+
 インストール不要。スマートフォンのブラウザでそのまま使えます。
 
 <p>
