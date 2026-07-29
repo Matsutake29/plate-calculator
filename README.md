@@ -5,7 +5,20 @@
 
 **▶ https://plate-calculator-zeta.vercel.app/**
 
+制作の背景と設計の解説 → **https://mt-tk.com/plate-calculator/**
+
 インストール不要。スマートフォンのブラウザでそのまま使えます。
+
+<p>
+  <picture>
+    <source srcset="docs/images/demo-light.gif" media="(prefers-color-scheme: light)">
+    <img src="docs/images/demo-dark.gif" alt="操作のデモ。目標重量を増やすとプレートの構成が変わり、環境設定でバーの重さや使えるプレートを変えると、片側の重量と入力の刻みが自動で追従する" width="32%">
+  </picture>
+</p>
+
+目標を入れると構成が出ます。
+後半は環境設定でバーを 15kg に、カラーを 2.5kg × 2 に変えたところ。
+片側の重量と入力の刻みが自動で追従します。
 
 <p>
   <img src="docs/images/iphone-light.png" alt="ライトモードの画面。バー10kg・カラー2.5kg×2・全プレート使用可の設定で、目標104.5kg に対して片側44.75kg のプレート構成を表示している" width="32%">
@@ -39,8 +52,18 @@ Web アプリにすれば、その場にいる全員が手元のスマートフ�
 
 <table>
   <tr>
-    <td width="50%" valign="top"><img src="docs/images/result-142.5kg.jpg" alt="目標142.5kg に対して片側61.25kg と表示された画面。25kg が2枚、10kg が1枚、1.25kg が1枚、それぞれの色の板として並んでいる"></td>
-    <td width="50%" valign="top"><img src="docs/images/environment-settings.jpg" alt="環境設定を展開した画面。バー・カラー・使用可能プレートを選ぶボタンが並び、0.25kg を on にしたため目標重量欄の表示が0.5kg単位になっている"></td>
+    <td width="50%" valign="top">
+      <picture>
+        <source srcset="docs/images/result-142.5kg-light.webp" media="(prefers-color-scheme: light)">
+        <img src="docs/images/result-142.5kg-dark.webp" alt="目標142.5kg に対して片側61.25kg と表示された画面。25kg が2枚、10kg が1枚、1.25kg が1枚、それぞれの色の板として並んでいる">
+      </picture>
+    </td>
+    <td width="50%" valign="top">
+      <picture>
+        <source srcset="docs/images/environment-settings-light.webp" media="(prefers-color-scheme: light)">
+        <img src="docs/images/environment-settings-dark.webp" alt="環境設定を展開した画面。バー・カラー・使用可能プレートを選ぶボタンが並び、0.25kg を on にしたため目標重量欄の表示が0.5kg単位になっている">
+      </picture>
+    </td>
   </tr>
   <tr>
     <td valign="top"><code>142.3</code> と入力すると <strong>142.5kg に丸まり</strong>、片側 61.25kg（25kg × 2 + 10kg + 1.25kg）が表示されます。</td>
@@ -95,6 +118,16 @@ type CalculatePlatesResult =
 刻みを 0.5kg などに固定すると、1.25kg までしかないジムで「組めない重量」を入力できてしまいます。
 在庫から導けば、どの環境でも自動的に正しくなります。
 副産物として、0.25kg プレートを on にすると刻みが 0.5kg になり、これは IPF の記録更新の最小幅と一致します。
+
+<p>
+  <picture>
+    <source srcset="docs/images/stock-25kg-only-light.webp" media="(prefers-color-scheme: light)">
+    <img src="docs/images/stock-25kg-only-dark.webp" alt="使用可能プレートを25kgだけにした画面。目標重量欄が50kg単位の表示になり、220kg・片側100kg（25kg×4）と出ている" width="32%">
+  </picture>
+</p>
+
+25kg しか使えない環境にすると、刻みは自動で **50kg 単位**（25kg × 2）になります。
+`200` と入力しても、実際に組める 220kg に丸まります。
 
 ### エラーは「起こさない」「報告する」「弾く」の 3 層で扱う
 
