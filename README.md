@@ -39,8 +39,18 @@ Web アプリにすれば、その場にいる全員が手元のスマートフ�
 
 <table>
   <tr>
-    <td width="50%" valign="top"><img src="docs/images/result-142.5kg.jpg" alt="目標142.5kg に対して片側61.25kg と表示された画面。25kg が2枚、10kg が1枚、1.25kg が1枚、それぞれの色の板として並んでいる"></td>
-    <td width="50%" valign="top"><img src="docs/images/environment-settings.jpg" alt="環境設定を展開した画面。バー・カラー・使用可能プレートを選ぶボタンが並び、0.25kg を on にしたため目標重量欄の表示が0.5kg単位になっている"></td>
+    <td width="50%" valign="top">
+      <picture>
+        <source srcset="docs/images/result-142.5kg-light.webp" media="(prefers-color-scheme: light)">
+        <img src="docs/images/result-142.5kg-dark.webp" alt="目標142.5kg に対して片側61.25kg と表示された画面。25kg が2枚、10kg が1枚、1.25kg が1枚、それぞれの色の板として並んでいる">
+      </picture>
+    </td>
+    <td width="50%" valign="top">
+      <picture>
+        <source srcset="docs/images/environment-settings-light.webp" media="(prefers-color-scheme: light)">
+        <img src="docs/images/environment-settings-dark.webp" alt="環境設定を展開した画面。バー・カラー・使用可能プレートを選ぶボタンが並び、0.25kg を on にしたため目標重量欄の表示が0.5kg単位になっている">
+      </picture>
+    </td>
   </tr>
   <tr>
     <td valign="top"><code>142.3</code> と入力すると <strong>142.5kg に丸まり</strong>、片側 61.25kg（25kg × 2 + 10kg + 1.25kg）が表示されます。</td>
