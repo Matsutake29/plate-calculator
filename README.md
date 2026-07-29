@@ -119,6 +119,16 @@ type CalculatePlatesResult =
 在庫から導けば、どの環境でも自動的に正しくなります。
 副産物として、0.25kg プレートを on にすると刻みが 0.5kg になり、これは IPF の記録更新の最小幅と一致します。
 
+<p>
+  <picture>
+    <source srcset="docs/images/stock-25kg-only-light.webp" media="(prefers-color-scheme: light)">
+    <img src="docs/images/stock-25kg-only-dark.webp" alt="使用可能プレートを25kgだけにした画面。目標重量欄が50kg単位の表示になり、220kg・片側100kg（25kg×4）と出ている" width="32%">
+  </picture>
+</p>
+
+25kg しか使えない環境にすると、刻みは自動で **50kg 単位**（25kg × 2）になります。
+`200` と入力しても、実際に組める 220kg に丸まります。
+
 ### エラーは「起こさない」「報告する」「弾く」の 3 層で扱う
 
 **1. 起こさない。**
