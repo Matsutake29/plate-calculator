@@ -8,6 +8,17 @@
 インストール不要。スマートフォンのブラウザでそのまま使えます。
 
 <p>
+  <picture>
+    <source srcset="docs/images/demo-light.gif" media="(prefers-color-scheme: light)">
+    <img src="docs/images/demo-dark.gif" alt="操作のデモ。目標重量を増やすとプレートの構成が変わり、環境設定でバーの重さや使えるプレートを変えると、片側の重量と入力の刻みが自動で追従する" width="32%">
+  </picture>
+</p>
+
+目標を入れると構成が出ます。
+後半は環境設定でバーを 15kg に、カラーを 2.5kg × 2 に変えたところ。
+片側の重量と入力の刻みが自動で追従します。
+
+<p>
   <img src="docs/images/iphone-light.png" alt="ライトモードの画面。バー10kg・カラー2.5kg×2・全プレート使用可の設定で、目標104.5kg に対して片側44.75kg のプレート構成を表示している" width="32%">
   <img src="docs/images/iphone-dark.png" alt="左と同じ設定・同じ目標重量をダークモードで表示した画面" width="32%">
 </p>
